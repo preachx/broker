@@ -1,0 +1,12 @@
+<%= image_tag "logo.png" %>
+
+<p>Welcome <%= @resource.name %>!</p>
+
+<p>Thank you for showing interest in trade with us. As you very well know the first step is the hardest.
+  You have covered the hardest part. We need to confirm your email address to ensure future communications. </p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>If you haven't signed up for an account in Ami Traders, please ignore this mail.</p>
