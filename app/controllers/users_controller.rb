@@ -36,12 +36,27 @@ class UsersController < ApplicationController
     if attributes_updated
       redirect_to :edit_user_registration, :notice => "Attributes were updated successfully"
     else
-      redirect_to :edit_user_registration
+      redirect_to :edit_user_registration, :alert => error_messages_for(@user.user_attribute)
     end
-
   end
 
   private
+
+  def error_messages_for(model)
+    return '' if model.errors.empty?
+
+    messages = model.errors.full_messages.map { |msg| "<li> #{msg} </li>" }.join
+    sentence = I18n.t("errors.messages.not_saved",
+                      count: model.errors.count,
+                      resource: model.class.model_name.human.downcase)
+
+    html = <<-HTML
+      <h3>#{sentence}</h3>
+    <ul>#{messages}</ul>
+    HTML
+
+    html.html_safe
+  end
 
   def secure_params
     params.require(:user).permit([:name,:role])
