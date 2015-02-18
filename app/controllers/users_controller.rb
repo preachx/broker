@@ -29,10 +29,22 @@ class UsersController < ApplicationController
     redirect_to users_path, :notice => "User deleted."
   end
 
+  def update_attributes
+    @user = User.find(params[:id])
+    authorize @user
+    @user.user_attribute.update_attributes(secure_user_attribute_params)
+    redirect_to :edit_user_registration
+  end
+
   private
 
   def secure_params
     params.require(:user).permit([:name,:role])
+  end
+
+  def secure_user_attribute_params
+    params.require(:user_attribute).permit([:vat_number, :cst_number, :pan_number,
+                  :bank_name, :bank_branch, :bank_account_number, :bank_rtgs_code])
   end
 
 end
