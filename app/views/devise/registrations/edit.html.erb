@@ -30,7 +30,7 @@
     <span id="bank_info"></span>
     <legend>Bank Account</legend>
     <%= form_for(@user.user_attribute, :as => :user_attribute, :url => user_attributes_update_path(@user.id), :html => {:method => :put, :role => 'form'}) do |f| %>
-        <% if @user.user_attribute.bank_name.empty? || @user.user_attribute.bank_branch.empty? || @user.user_attribute.bank_account_number.empty? || @user.user_attribute.bank_rtgs_code.empty? %>
+        <% if @user.user_attribute.bank_name.blank? || @user.user_attribute.bank_branch.blank? || @user.user_attribute.bank_account_number.blank? || @user.user_attribute.bank_rtgs_code.blank? %>
             <p class="alert-danger">Once entered, this information cannot be changed. Please make sure you enter this data correctly.</p>
         <% end %>
         <% if @user.user_attribute.bank_name.present? || @user.user_attribute.bank_branch.present? || @user.user_attribute.bank_account_number.present? || @user.user_attribute.bank_rtgs_code.present? %>
@@ -52,6 +52,14 @@
           <%= f.label :bank_rtgs_code %>
           <%= f.text_field :bank_rtgs_code, class: 'form-control', readonly: @user.user_attribute.bank_rtgs_code.present? %>
         </div>
+        <div class="form-group">
+          <%= f.label :cancelled_cheque_photo %>
+          <% if @user.user_attribute.cancelled_cheque_photo.present? %>
+              <%= image_tag @user.user_attribute.cancelled_cheque_photo.url(:thumb) %>
+          <% else %>
+          <%= f.file_field :cancelled_cheque_photo, class: 'form-control' %>
+              <% end %>
+        </div>
         <%= f.submit 'Update', :class => 'button right' %>
     <% end %>
   </div>
@@ -60,10 +68,10 @@
     <span id="tax_info"></span>
     <legend>Tax Information</legend>
     <%= form_for(@user.user_attribute, :as => :user_attribute, :url => user_attributes_update_path(@user.id), :html => {:method => :put, :role => 'form'}) do |f| %>
-        <% if @user.user_attribute.bank_name.empty? || @user.user_attribute.bank_branch.empty? || @user.user_attribute.bank_account_number.empty? || @user.user_attribute.bank_rtgs_code.empty? %>
+        <% if @user.user_attribute.vat_number.blank? || @user.user_attribute.cst_number.blank? || @user.user_attribute.pan_number.blank? %>
             <p class="alert-danger">Once entered, this information cannot be changed. Please make sure you enter this data correctly.</p>
         <% end %>
-        <% if @user.user_attribute.bank_name.present? || @user.user_attribute.bank_branch.present? || @user.user_attribute.bank_account_number.present? || @user.user_attribute.bank_rtgs_code.present? %>
+        <% if @user.user_attribute.vat_number.present? || @user.user_attribute.cst_number.present? || @user.user_attribute.pan_number.present? %>
             <p class="alert-danger">To change the data entered, please call customer care.</p>
         <% end %>
         <div class="form-group">

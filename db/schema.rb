@@ -29,6 +29,10 @@ ActiveRecord::Schema.define(version: 20150213070322) do
     t.string   "primary_address_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cancelled_cheque_photo_file_name"
+    t.string   "cancelled_cheque_photo_content_type"
+    t.integer  "cancelled_cheque_photo_file_size"
+    t.datetime "cancelled_cheque_photo_updated_at"
   end
 
   add_index "user_attributes", ["user_id"], name: "index_user_attributes_on_user_id", unique: true, using: :btree

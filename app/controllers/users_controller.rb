@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def secure_user_attribute_params
     params.require(:user_attribute).permit([:vat_number, :cst_number, :pan_number,
-                  :bank_name, :bank_branch, :bank_account_number, :bank_rtgs_code])
+                  :bank_name, :bank_branch, :bank_account_number, :bank_rtgs_code, :cancelled_cheque_photo])
   end
 
 end

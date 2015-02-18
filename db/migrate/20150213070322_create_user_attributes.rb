@@ -16,6 +16,8 @@ class CreateUserAttributes < ActiveRecord::Migration
       t.timestamps
     end
 
+    add_attachment :user_attributes, :cancelled_cheque_photo
+
     add_index :user_attributes, :user_id, unique: true
   end
 end
