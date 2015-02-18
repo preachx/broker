@@ -32,8 +32,13 @@ class UsersController < ApplicationController
   def update_attributes
     @user = User.find(params[:id])
     authorize @user
-    @user.user_attribute.update_attributes(secure_user_attribute_params)
-    redirect_to :edit_user_registration
+    attributes_updated = @user.user_attribute.update_attributes(secure_user_attribute_params)
+    if attributes_updated
+      redirect_to :edit_user_registration, :notice => "Attributes were updated successfully"
+    else
+      redirect_to :edit_user_registration
+    end
+
   end
 
   private
