@@ -1,0 +1,4 @@
+- if action.model.model.can_approve?
+  .well.action-well
+    = form_tag(action.path, class: action.name) do
+      = submit_tag("Approve", class: "btn btn-primary")

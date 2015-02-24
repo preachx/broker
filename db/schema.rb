@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150213070322) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "role"
+    t.integer  "role",                   default: 0
     t.integer  "status",                 default: 0
   end
 

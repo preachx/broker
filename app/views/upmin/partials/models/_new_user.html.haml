@@ -1,0 +1,23 @@
+.upmin-model{class: model.color}
+  %h3
+    Create a
+    = model.humanized_name(:singular)
+
+  %br
+  %br
+  %h3{style: "color: #333;"}
+    Attributes
+  %hr
+
+  .attributes
+    = form_for(model, url: model.create_path, html: { method: :post }) do |f|
+
+      -# Render each attribute
+      - model.attributes.each do |attribute|
+        = up_render(attribute, locals: { form_builder: f })
+
+      %div{class: "form-group"}
+        = f.label :password
+        = f.password_field :password, class: "form-control"
+
+      = f.submit("Create", class: "btn btn-primary")

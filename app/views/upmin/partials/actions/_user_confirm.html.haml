@@ -1,0 +1,4 @@
+- unless action.model.model.confirmed?
+  .well.action-well
+    = form_tag(action.path, class: action.name) do
+      = submit_tag("Confirm", class: "btn btn-primary")

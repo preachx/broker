@@ -1,0 +1,50 @@
+.upmin-model{class: model.color}
+  %h3
+    = model.title
+
+  %br
+  %br
+  %h3{style: "color: #333;"}
+    Attributes
+  %hr
+
+  .attributes
+    -# Yes this is meant to be model.model - this is the raw rails model instance.
+    = form_for(model, url: model.path, html: { method: :put }) do |f|
+
+      -# Render each attribute
+      - model.attributes.each do |attribute|
+        = up_render(attribute, locals: { form_builder: f })
+
+
+      %div{class: "form-group"}
+        = f.label :cancelled_cheque_photo
+        - if model.cancelled_cheque_photo
+          = image_tag model.cancelled_cheque_photo.url(:thumb)
+        = f.file_field :cancelled_cheque_photo, class: "form-control"
+      = f.submit("Save", class: "btn btn-primary")
+
+
+  - if model.associations.any?
+    %br
+    %br
+    %br
+    %h3{style: "color: #333;"}
+      Associations
+    %hr
+    .associations
+      - model.associations.each do |association|
+        = up_render(association)
+
+
+  - if model.actions.any?
+    %br
+    %br
+    %br
+    %h3{style: "color: #333;"}
+      Actions
+    %hr
+    .actions
+      - model.actions.each do |action|
+        = up_render(action)
+
