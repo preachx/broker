@@ -19,7 +19,7 @@
 
       %div{class: "form-group"}
         = f.label :cancelled_cheque_photo
-        - if model.cancelled_cheque_photo
+        - if model.cancelled_cheque_photo.exists?
           = image_tag model.cancelled_cheque_photo.url(:thumb)
         = f.file_field :cancelled_cheque_photo, class: "form-control"
       = f.submit("Save", class: "btn btn-primary")

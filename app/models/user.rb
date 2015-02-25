@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   enum role: [:user, :admin]
-  enum status: [:pending, :approved]
+  enum status: [:pending, :awaiting_approval, :approved]
 
-  has_one :user_attribute, :dependent => :destroy, :autosave => true
+  has_one :user_attribute, :autosave => true
+  has_many :addresses
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
 
 
   def can_approve?
-    confirmed? && all_data_updated? && pending?
+    confirmed? && awaiting_approval?
   end
 
 end

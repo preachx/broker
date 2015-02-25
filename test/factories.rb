@@ -32,11 +32,6 @@ FactoryGirl.define do
     status :approved
     confirmed_at Time.now
     confirmation_sent_at Time.now
-    factory :approved_user_with_attributes do
-      after(:create) do |user, evaluator|
-        create(:user_attribute, user: user)
-      end
-    end
   end
 
   factory :admin, class: User do
@@ -54,5 +49,16 @@ FactoryGirl.define do
     bank_account_number "asdn092qisdkfjns"
     bank_rtgs_code "asldnlasndlknas"
     station "sadasd"
+  end
+
+  factory :address do
+    user
+    address_line_1 "address_line_1"
+    address_line_2 "address_line_2"
+    city "city"
+    state "state"
+    postal_code "380009"
+    mobile_number "9988776655"
+    landline_number "89726578965"
   end
 end

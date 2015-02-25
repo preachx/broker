@@ -40,6 +40,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_address
+    user = User.find(params[:user_id])
+    authorize user
+    address = user.addresses.create(secure_address_params)
+
+    if address.id.blank?
+      # redirect it back if errors
+      redirect_to :edit_user_registration, :alert => error_messages_for(address)
+    else
+      #set primary address if default checkbox selected
+      user.user_attribute.set_primary_address(address) if params[:address][:set_as_default] == '1'
+      redirect_to :edit_user_registration, :notice => "Address created successfully"
+    end
+  end
+
+  def set_default_address
+    user = User.find(params[:user_id])
+    authorize user
+    address = user.addresses.find(params[:id])
+    user.user_attribute.set_primary_address(address)
+    render text: "Default address set"
+  end
+
   private
 
   def error_messages_for(model)
@@ -65,6 +88,10 @@ class UsersController < ApplicationController
   def secure_user_attribute_params
     params.require(:user_attribute).permit([:vat_number, :cst_number, :pan_number,
                   :bank_name, :bank_branch, :bank_account_number, :bank_rtgs_code, :cancelled_cheque_photo])
+  end
+
+  def secure_address_params
+    params.require(:address).permit([:address_line_1, :address_line_2, :city, :state, :postal_code, :mobile_number, :landline_number])
   end
 
 end

@@ -96,7 +96,44 @@
 
   <div class="authform">
     <span id="addresses"></span>
-
+    <legend>Add a new address</legend>
+    <%= form_for(Address.new, :as => :address, :url => user_address_create_path(@user.id), :html => {:method => :post, :role => 'form'}) do |f| %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+        <div class="form-group">
+          <%= f.label :address_line_1 %>
+          <%= f.text_field :address_line_1, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :address_line_2 %>
+          <%= f.text_field :address_line_2, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :city %>
+          <%= f.text_field :city, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :state %>
+          <%= f.text_field :state, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :postal_code %>
+          <%= f.number_field :postal_code, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :mobile_number %>
+          <%= f.phone_field :mobile_number, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :landline_number %>
+          <%= f.phone_field :landline_number, class: 'form-control' %>
+        </div>
+        <div class="checkbox" style="width:150px">
+          <label>
+            <%= check_box :address, :set_as_default %> Set as default
+          </label>
+        </div>
+        <%= f.submit 'Update', :class => 'button right' %>
+    <% end %>
   </div>
 
   <div class="authform">

@@ -17,6 +17,24 @@ img {
   max-width: 100px;
   color: #730E15;
 }
+
+.list-non-a {
+  color: aliceblue;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.pending {
+  color: #777;
+}
+
+.awaiting_approval {
+  color: #B00100;
+}
+
+.approved {
+  color: chartreuse;
+}
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
 // to make views framework-neutral

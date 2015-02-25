@@ -3,10 +3,12 @@
     <% if current_user.admin? %>
         <li><%= link_to 'Admin', '/admin', "target" => "_blank" %></li>
         <li><%= link_to 'Users', users_path %></li>
+    <% else %>
+        <li class="list-non-a"> Account Status: <span class=<%= current_user.status %> > <%= current_user.status.humanize %> </span> &nbsp; |   </li>
     <% end %>
 <% end %>
 <% if user_signed_in? %>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+  <li><%= link_to 'Manage Profile', edit_user_registration_path %></li>
   <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
   <li><%= link_to 'Sign in', new_user_session_path %></li>

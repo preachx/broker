@@ -5,7 +5,7 @@ class UserAttributeTest < ActiveSupport::TestCase
   #   assert true
   # end
   should "check all data present" do
-    user = FactoryGirl.create(:approved_user_with_attributes)
+    user = FactoryGirl.create(:user_attribute)
     assert user.user_attribute.all_data_present?
   end
 end
